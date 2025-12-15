@@ -3,7 +3,7 @@
 An interactive New Year Wish Jar web project built with HTML, CSS and JavaScript.
 
 ## Live Demo
-https://yeni-yil-dilek-kavanozu.netlify.app/
+https://yeni-yil-dilek-kavanozu-dk.netlify.app/
 
 ## About the Project
 This project is a simple and interactive web experience where users can open a virtual envelope and write their wishes for the new year.  
