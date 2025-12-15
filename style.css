@@ -1,0 +1,494 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    color: #2b2b2b;
+    background-image: url("assets/bg.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+@media (max-width: 520px) {
+    body {
+        background-image: url("assets/bg-mobile.png");
+        background-position: center 0%;
+        background-size: cover;
+        background-attachment: scroll;
+    }
+
+    .stage {
+        min-height: 100svh;
+        display: grid;
+        grid-template-rows: minmax(140px, 22vh) auto 1fr;
+        justify-items: center;
+        padding: 16px 14px 16px;
+        place-items: unset;
+        /* desktop ayarını ez */
+    }
+
+    .center-area {
+        margin-top: 0;
+        /* asıl fark */
+        width: min(760px, 92vw);
+        gap: 12px;
+    }
+
+    .jar {
+        width: min(380px, 92vw);
+        padding-top: 26px;
+    }
+
+    .jar__glass {
+        width: min(340px, 90vw);
+        height: min(260px, 38vh);
+    }
+
+    .card {
+        padding: 12px 14px;
+        min-height: 72px;
+    }
+
+    .btn {
+        min-height: 44px;
+        padding: 10px 14px;
+    }
+
+    .meta {
+        font-size: 13px;
+    }
+}
+
+
+.stage {
+    min-height: 100%;
+    display: grid;
+    place-items: start center;
+    padding: 24px;
+    position: relative;
+}
+
+.center-area {
+    position: relative;
+    width: min(760px, 92vw);
+    margin-top: clamp(150px, 18vh, 240px);
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+}
+
+
+.center-area {
+    position: relative;
+    width: min(760px, 92vw);
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+}
+
+/* KAVANOZ */
+.jar {
+    width: min(420px, 86vw);
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding-top: 34px;
+}
+
+.jar__glass {
+    width: min(380px, 80vw);
+    height: min(300px, 44vh);
+    border-radius: 50% 50% 44% 44%;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow:
+        inset 0 0 28px rgba(255, 255, 255, 0.75),
+        0 26px 56px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 0 3px #b23b2d,
+        inset 0 0 28px rgba(255, 255, 255, 0.75),
+        0 26px 56px rgba(0, 0, 0, 0.22);
+}
+
+.jar__glass::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 74%;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.jar__glass::after {
+    content: "";
+    position: absolute;
+    top: 38px;
+    left: 16%;
+    width: 14%;
+    height: 65%;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    transform: rotate(10deg);
+}
+
+/* KAPAK*/
+.jar__lid {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 58%;
+    height: 44px;
+    border-radius: 18px;
+    background: #b23b2d;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+    z-index: 6;
+
+    transform-origin: 12% 70%;
+    transition: transform 0.35s ease;
+}
+
+.jar.jar--lid-open .jar__lid {
+    transform: translateX(-50%) rotate(-18deg) translateY(-3px);
+}
+
+.jar__label {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 12px 20px;
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    color: #b23b2d;
+
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+}
+
+
+/* Kavanoz sallanma */
+@keyframes jarShake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    20% {
+        transform: translateX(-6px) rotate(-2deg);
+    }
+
+    40% {
+        transform: translateX(6px) rotate(2deg);
+    }
+
+    60% {
+        transform: translateX(-5px) rotate(-1.5deg);
+    }
+
+    80% {
+        transform: translateX(5px) rotate(1.5deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+.jar.jar--shake {
+    animation: jarShake 0.55s ease-in-out;
+}
+
+/* ZARF*/
+.envelope {
+    position: absolute;
+    left: 50%;
+    top: 140px;
+    transform: translate(-50%, 170px) scale(0.65);
+    width: 150px;
+    height: 100px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    z-index: 7;
+    pointer-events: none;
+    opacity: 0;
+
+    transition:
+        transform 0.55s cubic-bezier(.2, .9, .2, 1),
+        opacity 0.25s ease;
+    filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.18));
+}
+
+.envelope__front {
+    position: absolute;
+    inset: 0;
+    background: #c63a2c;
+    border-radius: 16px;
+    box-shadow: inset 0 -6px 0 rgba(255, 255, 255, 0.12);
+}
+
+.envelope__front::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 16px;
+    bottom: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 12px;
+}
+
+.envelope__flap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 60%;
+    background: #b63226;
+    border-radius: 16px 16px 10px 10px;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.45s ease;
+    clip-path: polygon(0 0, 50% 70%, 100% 0, 100% 60%, 0 60%);
+}
+
+.envelope__hint {
+    position: absolute;
+    left: 50%;
+    bottom: -34px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.06);
+    }
+}
+
+.jar.jar--envelope-ready .envelope__hint {
+    animation: pulse 0.9s ease-in-out infinite;
+}
+
+/* Zarf kavanozdan çıkar */
+.jar.jar--envelope-show #envelope {
+    opacity: 1;
+    transform: translate(-50%, 26px) scale(1);
+}
+
+/* Zarf ekrana yaklaşır */
+.jar.jar--envelope-zoom #envelope {
+    transform: translate(-50%, -10px) scale(1.65);
+}
+
+/* Zarf tıklanabilir */
+.jar.jar--envelope-ready #envelope {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* Zarfa tıklayınca aç */
+.jar.jar--envelope-open #envelope .envelope__flap {
+    transform: rotateX(170deg);
+}
+
+/* KART */
+.card {
+    width: min(480px, 92vw);
+    min-height: 84px;
+    border-radius: 18px;
+    padding: 16px 18px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    line-height: 1.45;
+    background: rgba(255, 255, 255, .88);
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+}
+
+/* BUTONLAR */
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn--primary {
+    background: #b23b2d;
+    color: #fff;
+}
+
+.btn--ghost {
+    background: rgba(255, 255, 255, .90);
+    color: #2b2b2b;
+    border: 1px solid rgba(0, 0, 0, .08);
+}
+
+.meta {
+    font-size: 14px;
+    opacity: .8;
+}
+
+/* KAĞIT */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    place-items: center;
+    z-index: 50;
+    padding: 18px;
+}
+
+.overlay.overlay--show {
+    display: grid;
+}
+
+@keyframes paperPop {
+    0% {
+        transform: translateY(10px) scale(0.96);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.paper {
+    width: min(400px, 92vw);
+    border-radius: 14px;
+    padding: 30px 26px 26px;
+    position: relative;
+    background: #fff;
+    animation: paperPop 0.25s ease-out;
+}
+
+.paper::after {
+    content: none;
+}
+
+.paper__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(255, 255, 255, 0.85);
+    color: #b23b2d;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+}
+
+
+
+.paper__title {
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.paper__text {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Mobil */
+@media (max-width: 520px) {
+    body {
+        background-image: url("assets/bg-mobile.png");
+        background-size: cover;
+        background-position: center 0%;
+        background-attachment: scroll;
+    }
+
+    .meta {
+        display: none;
+    }
+}
+
+
+
+/* yazı animasyonu */
+.paper__text {
+    white-space: pre-wrap;
+}
+
+.paper__text.typing::after {
+    content: "▍";
+    display: inline-block;
+    margin-left: 6px;
+    animation: blink 0.9s infinite;
+    vertical-align: baseline;
+}
+
+@keyframes blink {
+
+    0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}

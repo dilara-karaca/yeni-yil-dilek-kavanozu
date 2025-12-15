@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2026 Dilek Kavanozu</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <main class="stage">
+        <section class="center-area">
+
+            <div class="jar" id="jar">
+                <div class="jar__lid" id="jarLid"></div>
+                <div class="jar__glass"></div>
+                <button class="envelope" id="envelope" type="button" aria-label="Zarfı aç">
+                    <div class="envelope__front"></div>
+                    <div class="envelope__flap"></div>
+                    <div class="envelope__hint">Açmak için tıkla</div>
+                </button>
+
+                <div class="jar__label">Dilek Kavanozu</div>
+            </div>
+
+            <div class="card" id="wishCard">Kart çek ve zarfı aç.</div>
+
+            <div class="actions">
+                <button class="btn btn--primary" id="drawBtn">Kart Çek</button>
+                <button class="btn btn--ghost" id="resetBtn">Sıfırla</button>
+            </div>
+
+            <div class="meta" id="meta"></div>
+
+        </section>
+    </main>
+    <div class="overlay" id="overlay" aria-hidden="true">
+        <div class="paper" role="dialog" aria-modal="true" aria-label="Dilek Kağıdı">
+            <button class="paper__close" id="paperClose" aria-label="Kapat">×</button>
+            <div class="paper__title">Yeni Yıl Dileğin</div>
+            <div class="paper__text" id="paperText"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
