@@ -273,7 +273,6 @@ function startDrawFlow() {
     }, 1450);
 }
 
-/* 2) Zarf tıkla: zarf kapağı açılır -> kağıt açılır */
 function openEnvelope() {
     if (animating) return;
     if (!jarEl.classList.contains("jar--envelope-ready")) return;
@@ -283,13 +282,10 @@ function openEnvelope() {
     wishCardEl.textContent = "Açılıyor...";
 
     setTimeout(() => {
-        // Dileği animasyonlu yazdır
         overlayEl.classList.add("overlay--show");
         overlayEl.setAttribute("aria-hidden", "false");
         stopTyping();
         typeWish(currentWish, { speed: 22, startDelay: 120 });
-
-        // kalan sayıyı güncelle
         metaEl.textContent = `Kalan kart: ${remaining.length}`;
 
         animating = false;
